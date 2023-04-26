@@ -22,3 +22,5 @@ A go module and a binary to get Russian Central Bank currency rates.
 ```
 go get github.com/itroot/cbrates
 ```
+
+An example could be found [here](https://github.com/itroot/cbrates/blob/master/example_test.go).
