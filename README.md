@@ -3,7 +3,7 @@
 A go module and a binary to get Russian Central Bank currency rates.
 
 ### Run
-`go run github.com/itroot/cbrates/cmd/cbrates`
+`go run github.com/itroot/cbrates/cmd/cbrates@latest`
 
 ```
 +------------------------------------------------+
