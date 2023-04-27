@@ -7,6 +7,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/samber/lo"
 	"github.com/stretchr/testify/require"
 )
 
@@ -179,10 +180,12 @@ func Test_CachedClient_IntegrationTest(t *testing.T) {
 	getUSDValue := func(t *testing.T, vc *ValCurs) float64 {
 		t.Helper()
 
-		usd := vc.Filter([]string{"USD"})
-		require.Len(t, usd.ValuteSeq, 1)
+		usd := lo.Filter(vc.ValuteSeq, func(valute *Valute, _ int) bool {
+			return valute.CharCode == "USD"
+		})
+		require.Len(t, usd, 1)
 
-		return usd.ValuteSeq[0].MustParseFloat64()
+		return usd[0].MustParseFloat64()
 	}
 
 	for index, c := range cases {

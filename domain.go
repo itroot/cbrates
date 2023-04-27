@@ -20,27 +20,6 @@ type ValCurs struct {
 	ValuteSeq []*Valute `xml:"Valute"`
 }
 
-// Filter returns only requested currencies' info
-func (vc *ValCurs) Filter(codes []string) *ValCurs {
-	if len(codes) == 0 {
-		return vc
-	}
-
-	result := &ValCurs{
-		Date:      vc.Date,
-		ValuteSeq: make([]*Valute, 0, len(codes)),
-	}
-	for _, valute := range vc.ValuteSeq {
-		for _, code := range codes {
-			if code == valute.CharCode {
-				result.ValuteSeq = append(result.ValuteSeq, valute)
-				break
-			}
-		}
-	}
-	return result
-}
-
 type Valute struct {
 	ID       string  `xml:"ID,attr"`
 	NumCode  int     `xml:"NumCode"`

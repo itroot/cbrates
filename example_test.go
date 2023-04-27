@@ -19,6 +19,11 @@ func Example() {
 		log.Fatal(err)
 	}
 
-	fmt.Println(rates.Filter([]string{"USD"}).ValuteSeq[0].MustParseFloat64())
+	for _, valute := range rates.ValuteSeq {
+		if valute.CharCode == "USD" {
+			fmt.Println(valute.MustParseFloat64())
+			break
+		}
+	}
 	// Output: 62.4031
 }

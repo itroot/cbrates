@@ -44,9 +44,11 @@ func run(ctx context.Context, logger *log.Logger, args []string) error {
 		return err
 	}
 
-	var codes []string
+	codes := make(map[string]bool)
 	if len(filterString) != 0 {
-		codes = strings.Split(filterString, ",")
+		for _, code := range strings.Split(filterString, ",") {
+			codes[code] = true
+		}
 	}
 
 	newClient := cbrates.NewCachedClient
@@ -73,14 +75,16 @@ func run(ctx context.Context, logger *log.Logger, args []string) error {
 		"Name",
 		"Value",
 	})
-	for _, valute := range rates.Filter(codes).ValuteSeq {
-		tw.AppendRow(table.Row{
-			valute.CharCode,
-			valute.NumCode,
-			valute.Nominal,
-			valute.Name,
-			valute.Value,
-		})
+	for _, valute := range rates.ValuteSeq {
+		if len(codes) == 0 || codes[valute.CharCode] {
+			tw.AppendRow(table.Row{
+				valute.CharCode,
+				valute.NumCode,
+				valute.Nominal,
+				valute.Name,
+				valute.Value,
+			})
+		}
 	}
 	fmt.Println(tw.Render())
 	return nil
