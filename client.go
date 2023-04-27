@@ -20,7 +20,7 @@ type client struct {
 
 func (c *client) GetDailyRates(ctx context.Context, year int, month time.Month, day int) (*ValCurs, error) {
 	const (
-		UserAgent = "cbrates/0.0.1 (+https://github.com/itroot/cbrates)" // by some reason default go ua was getting blocked
+		UserAgent = "cbrates/v0 (+https://github.com/itroot/cbrates)" // by some reason default go ua was getting blocked
 	)
 
 	date := formatDate(year, month, day)
