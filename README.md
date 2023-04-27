@@ -17,6 +17,18 @@ A go module and a binary to get Russian Central Bank currency rates.
 +------+-----+--------+----------------+---------+
 ```
 
+`go run github.com/itroot/cbrates/cmd/cbrates@latest -h`
+```
+Usage of /tmp/go-build911405355/b001/exe/cbrates:
+  -date string
+    	Date to get rate values (default "27.04.2023")
+  -filter string
+    	Currencies codes to filter, empty string for all currencies (default "CNY,USD,EUR")
+  -no-cache
+    	Whether or not to cache requests
+ivan@gbox:~/Desktop/itroot/projects/subm
+```
+
 ### Use
 
 ```

@@ -67,7 +67,7 @@ func run(ctx context.Context, logger *log.Logger, args []string) error {
 	}
 
 	tw := table.NewWriter()
-	tw.SetTitle("Курсы валют ЦБ РФ на %s", date.Format(cbrates.DateFormat))
+	tw.SetTitle("Курсы валют ЦБ РФ на %s", rates.Date)
 	tw.AppendHeader(table.Row{
 		"Code",
 		"Num",

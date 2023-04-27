@@ -23,7 +23,8 @@ func (c *client) GetDailyRates(ctx context.Context, year int, month time.Month, 
 		UserAgent = "cbrates/0.0.1 (+https://github.com/itroot/cbrates)" // by some reason default go ua was getting blocked
 	)
 
-	url := fmt.Sprintf("http://www.cbr.ru/scripts/XML_daily.asp?date_req=%s", formatDate(year, month, day))
+	date := formatDate(year, month, day)
+	url := fmt.Sprintf("http://www.cbr.ru/scripts/XML_daily.asp?date_req=%s", date)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return nil, err
@@ -46,6 +47,10 @@ func (c *client) GetDailyRates(ctx context.Context, year int, month time.Month, 
 
 	if len(result.ValuteSeq) == 0 {
 		return nil, errors.New("no data for this date")
+	}
+
+	if result.Date != date {
+		return nil, errors.New("response does not match request date")
 	}
 
 	return &result, nil
