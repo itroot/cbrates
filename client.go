@@ -49,9 +49,5 @@ func (c *client) GetDailyRates(ctx context.Context, year int, month time.Month, 
 		return nil, errors.New("no data for this date")
 	}
 
-	if result.Date != date {
-		return nil, errors.New("response does not match request date")
-	}
-
 	return &result, nil
 }

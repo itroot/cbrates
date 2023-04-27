@@ -17,6 +17,10 @@ type cachedClient struct {
 }
 
 func (c *cachedClient) GetDailyRates(ctx context.Context, year int, month time.Month, day int) (*ValCurs, error) {
+	if time.Date(year, month, day, 0, 0, 0, 0, time.UTC).After(time.Now()) {
+		return c.client.GetDailyRates(ctx, year, month, day)
+	}
+
 	key := path.Join(c.cachePath, "GetDailyRates-"+formatDate(year, month, day))
 
 	if result := func() *ValCurs {
