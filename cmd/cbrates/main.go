@@ -74,6 +74,7 @@ func run(ctx context.Context, logger *log.Logger, args []string) error {
 		"Amount",
 		"Name",
 		"Value",
+		"Float64",
 	})
 	for _, valute := range rates.ValuteSeq {
 		if len(codes) == 0 || codes[valute.CharCode] {
@@ -83,6 +84,7 @@ func run(ctx context.Context, logger *log.Logger, args []string) error {
 				valute.Nominal,
 				valute.Name,
 				valute.Value,
+				valute.MustParseFloat64(),
 			})
 		}
 	}
